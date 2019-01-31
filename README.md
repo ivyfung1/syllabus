@@ -42,3 +42,28 @@ In this chapter, you will learn about what is Blockchain and its characteristics
 |  | o	Transparency |  |
 |  | o	Traceability |  |
 |  | o	Immutability |  |
+|  |**How** does Blockchain works? |  |
+|  |• Create transaction  |  |
+|  |• Candidate block  |  |
+|  |• Consensus Protocol  |  |
+|  |  o Proof-of-Work|  |
+|  |  o Proof-of-Stake|  |
+|  |  o Proof-of-Importance|  |
+|  |• Block gets added to the honest chain.  |  |
+|  |• The limitations of Blockchain  |  |
+|History of Blockchain  |**When** was Blockchain started?  |1 hour  |
+|  |• History of Money  |  |
+|  |• Pre-Bitcoin  |  |
+|  |  o DigiCash|  |
+|  |  |  |
+|  |  |  |
+|  |  |  |
+|  |  |  |
+|  |  |  |
+|  |  |  |
+|  |  |  |
+|  |  |  |
+|  |  |  |
+|  |  |  |
+|  |  |  |
+|  |  |  |
