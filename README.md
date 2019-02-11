@@ -156,14 +156,13 @@ In this chapter, SDKs and wrappers, APIs and JSON will be discussed. Catapult se
 |  |• Using NEM2-cli  |  |
 |  |• Exploring endpoints with Insomnia.  |  |
 
-##Applying NEM
+## Applying NEM
 In this chapter, we look into evaluating the need of blockchain for a project. Evaluate the necessity for the data to be recorded on the blockchain and how to do it.
 * **Total 14 hours**
 
 |Topic   |Description  |Time  |
 |---|---|---|
-|Blockchain or not?  |**What** problem(s) the business is trying to solve with Blockchain?
-  |2 hours  |
+|Blockchain or not?  |**What** problem(s) the business is trying to solve with Blockchain?|2 hours  |
 |  |• Is Blockchain necessary?  |  |
 |  |• Do you want to make your transactions transparent?  |  |
 |  |• What data you want to make immutable?  |  |
