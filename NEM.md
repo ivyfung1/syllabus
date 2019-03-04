@@ -275,7 +275,6 @@ in hashing format can be attached.
 
 `In m of n, m always has a number smaller or equal to n. When m=n, to delete a signatory, n-1 is applied.`
      
-
 *Caution:*
 ● Please ensure the account to be converted into multisig account as enough
 xem for the transaction.
