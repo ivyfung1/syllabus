@@ -73,48 +73,49 @@ The only way to change the account state is through a transaction. Through trans
 
 `However, the “signature” field will not be available if the transaction is to be signed by NIS1 or if it is a multisig transaction and all the cosignatories required are yet to sign. This also mean the transaction is not ready to be included in a block.`
 
-● fee:
-  ● Each transaction will have minimum fee of 0.05 xem even if there is no message and no xem is transferred in said transaction.
-  ● Higher transaction fee will get priority to be included in a block.
-  ● Insufficient funds will result in error message.
-● type:
-There are 8 types of transactions. Details will be discussed later of the chapter:
-  ● 0x101: Transfer of XEM from sender to recipient.
-  ● 0x801: Transfer of importance from sender to remote account.
-  ● 0x1001: An aggregate modification transaction, which converts a normal account into a multisig account.
-  ● 0x1002: A multisig signature transaction which is used to sign a multisig transaction.
-  ● 0x1004: A multisig transaction, which is used for multisig accounts.
-  ● 0x2001: Provision namespace transaction.
-  ● 0x4001: Mosaic definition creation transaction.
-  ● 0x4002: Mosaic supply change transaction.
-● deadline:
-  ● Measured in seconds, deadline is the time elapsed from Nemesis block. If the transaction
-doesn’t get included in a block upon the deadline, the transaction will be dropped.
-  ● Default dateline is 1 hour.
-  ● 24 hours is the maximum deadline.
-  ● Observing deadline is important for multisignature transactions.
-● version:
-Contains both the network version and the transaction version. Network version:
-  ● 0x98: the test network version
-  ● 0x68 : the main network version
-  ● 0x60 : the mijin network version Transaction version:
+● fee:  
+  ● Each transaction will have minimum fee of 0.05 xem even if there is no message and no xem is transferred in said transaction.  
+  ● Higher transaction fee will get priority to be included in a block.  
+  ● Insufficient funds will result in error message.  
+● type:  
+There are 8 types of transactions. Details will be discussed later of the chapter:  
+  ● 0x101: Transfer of XEM from sender to recipient.  
+  ● 0x801: Transfer of importance from sender to remote account.  
+  ● 0x1001: An aggregate modification transaction, which converts a normal account into a multisig account.  
+  ● 0x1002: A multisig signature transaction which is used to sign a multisig transaction.  
+  ● 0x1004: A multisig transaction, which is used for multisig accounts.  
+  ● 0x2001: Provision namespace transaction.  
+  ● 0x4001: Mosaic definition creation transaction.  
+  ● 0x4002: Mosaic supply change transaction.  
+● deadline:  
+  ● Measured in seconds, deadline is the time elapsed from Nemesis block. If the transaction doesn’t get included in a block upon the deadline, the transaction will be dropped.  
+  ● Default dateline is 1 hour.  
+  ● 24 hours is the maximum deadline.  
+  ● Observing deadline is important for multisignature transactions.  
+● version:  
+Contains both the network version and the transaction version.   
+Network version:  
+  ● 0x98: the test network version  
+  ● 0x68 : the main network version  
+  ● 0x60 : the mijin network version  
+Transaction version:  
   ● 0x01 version 1. For transaction of xem.
-  ● 0x02 version 2. For transaction of mosaics. It can be used for transaction of xem too as xem is a mosaic too, native to NEM network.
-e.g. -1744830463 = 0x98000001 (network version 0x98 and transaction version 0x01)
+  ● 0x02 version 2. For transaction of mosaics. It can be used for transaction of xem too as xem is a mosaic too, native to NEM network. e.g. -1744830463 = 0x98000001 (network version 0x98 and transaction version 0x01)
 ● signer:
   Holds the public key of the account initiated the transaction, encoded as hexadecimal string.
 
-Transactions is done through a POST request. There are 8 types of transactions: 
+Transactions is done through a `POST` request. There are 8 types of transactions: 
 
-1. **0x101: (257)** Transfer of XEM from sender to recipient.
+1. **0x101: (257)** Transfer of XEM from sender to recipient.  
 The most common transaction in NEM network, refer to as Transfer Transaction. All transactions need to be signed, hence, signature is the mandatory field in a transaction. To sign a transaction, there are two ways: to have a NIS to sign it on behalf or to sign it at application level.  
 
 `/transaction/prepare-announce`  
 
 The NIS needs the transaction initiator’s private key in order to sign the transaction on behalf. Hence, it is very important that only TRUSTED and LOCAL nodes that the private key is sending to. Sending private key to untrusted node risks having the private key being compromised.  
 
-The parameter for this API is RequestPrepareAnnounce:
-```JSON {
+The parameter for this API is RequestPrepareAnnounce:  
+```JSON 
+{
 "transaction":
    {
   "timeStamp": 9111526,
@@ -132,8 +133,8 @@ The parameter for this API is RequestPrepareAnnounce:
        }
 ```
 
-Fields and the descriptions:
-● amount:
+Fields and the descriptions:  
+● amount:  
 The amount of xem that is sending over to the recipient. It is always stated in micro xem, i.e. 1000000 equals to 1 xem.    
 ● [fee:](https://nemproject.github.io/#transaction-fees)  
 Every transaction incurs fee. The minimum fee is 0.05xem without message and amount less than 20,000 xem. The transaction fees for a certain block go to the harvester of that particular block. Details of fee calculation is available in 7.10 of NEM NIS API documentation.   
@@ -150,7 +151,8 @@ The private key of the account signing the transaction.
 
 The second method, sign the transaction before broadcasting the array and the corresponding signature to the NEM network via RequestAnounce object. This is a safer way as the initiator does not need to send the private key over to the node.  
 
-```JSON {
+```JSON 
+{
 "data": "010100000100000000000000200000002b76078fa709bbe6752222b215abc
   7ec0152ffe831fb4f9aed3e7749a425900a00093d000000000000000000280000
 0054444e46555946584f5353334e4e4c4f35465a5348535a49354c33374b4e514 9454850554d584c54c0d45407000000000b00000001000000030000000c3215", "signature": "db2473513c7f0ce9f8de6345f0fbe773dc687eb571123d08eab4d98f96849e
@@ -158,13 +160,14 @@ aeb63fa8756fb6c59d9b9d0e551537c1cdad4a564747ff9291db4a88b65c97c10d”
  }
 ```
 
-Fields and the descriptions:
-● data:
-The transaction data in the form of string. The string is created by first creating the corresponding byte array and then converting the byte array to a hexadecimal string. 
+Fields and the descriptions:  
+● data:  
+The transaction data in the form of string. The string is created by first creating the corresponding byte array and then converting the byte array to a hexadecimal string.   
 
 For every transaction broadcasted, there is a return [NemAnnounceResult](https://nemproject.github.io/#nemRequestResult).
 
-```JSON  {
+```JSON  
+{
 "type":1,
  "code":1,
 "message":"SUCCESS",
@@ -175,14 +178,14 @@ For every transaction broadcasted, there is a return [NemAnnounceResult](https:/
 }
 ```
 
-Fields and the descriptions:
-● type:  
+Fields and the descriptions:  
+● type:   
 The type of return depending on the request made.  
 1: The result is a validation result.   
 2: The result is a heartbeat result. 
 4: The result indicates a status.  
 ● code:   
-Error code for “type”. Refer to “code” description in 9.30 of NEM NIS API Documentation. https://nemproject.github.io/#nemRequestResult   
+Error code for “type”. Refer to “code” description in 9.30 of [NEM NIS API Documentation](https://nemproject.github.io/#nemRequestResult).  
 ● message:  
 Message about the error code.  
 ● transactionHash:  
@@ -212,7 +215,8 @@ The most common errors are:
 
 Importance is transferred from one account to another for harvesting purposes.  
 
-```JSON {
+```JSON 
+{
 "timeStamp": 9108808,
 "error": "Bad Request",
 "message": "address must be valid", "status": 400
@@ -241,7 +245,8 @@ This field holds the public key of the receiving account in hexadecimal format.
 
 This transaction converts a normal account into a multisig account.  
 
-```JSON {
+```JSON 
+{
   "timeStamp": 9111526,
 "fee": 28000000,
 "type": 4097,
@@ -264,11 +269,12 @@ This transaction converts a normal account into a multisig account.
    },
 ```
 
-Fields and the descriptions:
-● modifications (MultisigConsignatoryModification object): ○ modificationType:
-There are 2 types of modification:
-i. 1: Add a new cosignatory
-ii. 2: Delete an exisiting cosignatory.
+Fields and the descriptions:  
+● modifications (MultisigConsignatoryModification object):   
+○ modificationType:  
+There are 2 types of modification:  
+1: Add a new cosignatory  
+2: Delete an exisiting cosignatory.  
 ○ cosignatoryAccount:
 The public key of the cosignatory account in hexidecimal format.
 ● minCosignatories:
@@ -277,7 +283,8 @@ The public key of the cosignatory account in hexidecimal format.
 4. **0x1004: (4100)** A multisig transaction, which is used for multisig accounts.  
 A transaction from a multisig account being wrapped inside a multisig transaction.  
 
-```JSON   {
+```JSON   
+{
 "timeStamp": 9111526,
 "fee": 3000000,
 "type": 4100,
@@ -310,7 +317,8 @@ The cosignatories of a multisig transaction must know the hash of the inner tran
 
 NemAnnounceResult object:  
 
-```JSON {
+```JSON 
+{
 "type": 1,
 "code": 1,
 "message": "SUCCESS" "transactionHash": {
@@ -344,7 +352,8 @@ The address of the corresponding multisig account.
 6. **0x2001: (8193)** A provision namespace transaction.  
 Renting a namespace is done through ProvisionNamespaceTransaction object.   
 
-```JSON {
+```JSON 
+{
 31116fa4639fec684a56909c22cbf6db66613901", "fee": 150000,
 "type": 8193,
  "transaction":
@@ -377,11 +386,12 @@ The transaction will return an error if:
 ● The rental fee is insufficient.  
 To check if you are the owner of the namespace, use /account/namespaces request.  
 
-7. **0x4001: (16385)** A mosaic definition creation transaction.
+7. **0x4001: (16385)** A mosaic definition creation transaction.  
 
-To create mosaic, the MosaicDefinationCreationTransaction (in red) is needed.
+To create mosaic, the MosaicDefinationCreationTransaction (in red) is needed.  
 
-```JSON   {
+```JSON   
+{
 "timeStamp": 9111526, "signature":
 "651a19ccd09c1e0f8b25f6a0aac5825b0a20f158ca4e0d78f2abd904a3966b6e3599a47b9ff199a3a6e1152231
      "fee": 150000,
@@ -419,47 +429,46 @@ To create mosaic, the MosaicDefinationCreationTransaction (in red) is needed.
      }
 ```
 
-Fields and the descriptions:
-● creationFee:
-Fee in micro xem for creating mosaic.
-● createFeeSink:
-The public key of the account to which the creation fee is to be transferred to.
-● mosaicDefinition:
-The mosaic definition (highlighted in red) of MosaicDefinition object.
-● creator:
-The public key of the account creating the mosaic.
-● id: Explained by the MosaicId (highlighted in blue).
-○ namespaceId: The corresponding namespace id where the mosaics attach to.
-○ name: The name of the mosaic definition.
-● description:
-The mosaic description, and it cannot be left empty. The maximum length is 512 characters.
-● properties:
-The properties of the mosaic which the details are encapsulate in MosaicProperties object (highlighted in green). The fields can be left empty where the default value will be applied.
-○ name:
-The name of the mosaic property. There are totally 4 of them.
-○ value:
-The value of each of the mosaic property.
-■ divisibility: Defines the smallest sub-unit of the mosaic. The mosaic can have 0 divisibility meaning it cannot be subdivided and the maximum of 6 divisibility. Default value is 0.
-■ initialSupply: Defines the initial amount of mosaic to be created, as a whole, rather than in sub-unit. The initial supply amount should be between 1 to 9,000,000,000. Default value is 1,000.
-■ supplyMutable: Determines if the supply of the total supply of the mosaic is mutable. The total supply of the mosaic can be changed by using MosaicSupplyChangeTransaction object. Default value is “false”.
-■ transferable: Defines if the mosaics are free to be transacted between accounts other than from the creator to an account, and from that account back to the creator. Default value is “true”.
-○ levy:
-The creator of the mosaic can demand a fee to be paid for transferring the mosaic.
-■ type: There are 2 types of transaction fees:
-● 1: Absolute fee. It defines the fixed micro-mosaic to be transferred to
-the recipient for each transaction.
-● 2: Percentile fee. It defines the percentage of total mosaics is to be
-transferred to the recipient, in micro-mosaic.
-■ recipient: The address of the recipient of the levy.
-■ mosaicId: The mosaic in which the levy is paid.
-● namespaceId: the namespace the mosaic corresponding to.
-● name: the name of the mosaic used to pay for the levy.
-■ fee: Depends on the “type”, it is either the fixed micro-mosaic or the percentile.
+Fields and the descriptions:  
+● creationFee:  
+Fee in micro xem for creating mosaic.  
+● createFeeSink:  
+The public key of the account to which the creation fee is to be transferred to.  
+● mosaicDefinition:  
+The mosaic definition (highlighted in red) of MosaicDefinition object.  
+● creator:  
+The public key of the account creating the mosaic.  
+● id: Explained by the MosaicId (highlighted in blue).  
+○ namespaceId: The corresponding namespace id where the mosaics attach to.  
+○ name: The name of the mosaic definition.  
+● description:  
+The mosaic description, and it cannot be left empty. The maximum length is 512 characters.  
+● properties:  
+The properties of the mosaic which the details are encapsulate in MosaicProperties object (highlighted in green). The fields can be left empty where the default value will be applied.  
+○ name:  
+The name of the mosaic property. There are totally 4 of them.  
+○ value:  
+The value of each of the mosaic property.  
+■ divisibility: Defines the smallest sub-unit of the mosaic. The mosaic can have 0 divisibility meaning it cannot be subdivided and the maximum of 6 divisibility. Default value is 0.  
+■ initialSupply: Defines the initial amount of mosaic to be created, as a whole, rather than in sub-unit. The initial supply amount should be between 1 to 9,000,000,000. Default value is 1,000.  
+■ supplyMutable: Determines if the supply of the total supply of the mosaic is mutable. The total supply of the mosaic can be changed by using MosaicSupplyChangeTransaction object. Default value is “false”.  
+■ transferable: Defines if the mosaics are free to be transacted between accounts other than from the creator to an account, and from that account back to the creator. Default value is “true”.  
+○ levy:  
+The creator of the mosaic can demand a fee to be paid for transferring the mosaic.  
+■ type: There are 2 types of transaction fees:  
+● 1: Absolute fee. It defines the fixed micro-mosaic to be transferred to the recipient for each transaction.  
+● 2: Percentile fee. It defines the percentage of total mosaics is to be transferred to the recipient, in micro-mosaic.  
+■ recipient: The address of the recipient of the levy.  
+■ mosaicId: The mosaic in which the levy is paid.  
+● namespaceId: the namespace the mosaic corresponding to.  
+● name: the name of the mosaic used to pay for the levy.  
+■ fee: Depends on the “type”, it is either the fixed micro-mosaic or the percentile.  
 
-8. **0x4002: (16386)** A mosaic supply change transaction.
-To change the supply of the mosaic, only if “supplyMutable” is set to “true” when the mosaic is being created, a MosaicSupplyChangeTransaction object is needed.
+8. **0x4002: (16386)** A mosaic supply change transaction.  
+To change the supply of the mosaic, only if “supplyMutable” is set to “true” when the mosaic is being created, a MosaicSupplyChangeTransaction object is needed.  
 
-```JSON {
+```JSON 
+{
  "timeStamp": 9111526, "signature":
   "651a19ccd09c1e0f8b25f6a0aac5825b0a20f158ca4e0d78f2abd904a3966b6e3599a47b9ff199a3a6e1152231
   116fa4639fec684a56909c22cbf6db66613901", "fee": 150000,
@@ -473,26 +482,24 @@ To change the supply of the mosaic, only if “supplyMutable” is set to “tru
 "name": "gift vouchers" }
 ```
 
-Fields and the descriptions:
-● supplyType:
-The total supply can be increase or decrease.
-○ 1: Increase in supply.
-○ 2: Decrease in supply.
-● delta:
-The amount to be increased or decreased.
-● MosaicId:
-The ID of the mosaic which supply is to be changed.
-The transaction may not be accepted by NIS due to:
-● The transaction signer is not the creator of the mosaic.
-● The “supplyMutable” is set to “false”.
-● The total supply exceeded 9,000,000,000.
-● The total amount of mosaics the creator owns is lesser than the amount the creator wants
-to decrease/delete.
+Fields and the descriptions:  
+● supplyType:  
+The total supply can be increase or decrease.  
+○ 1: Increase in supply.  
+○ 2: Decrease in supply.  
+● delta:  
+The amount to be increased or decreased.  
+● MosaicId:  
+The ID of the mosaic which supply is to be changed.  
+The transaction may not be accepted by NIS due to:   
+● The transaction signer is not the creator of the mosaic.  
+● The “supplyMutable” is set to “false”.  
+● The total supply exceeded 9,000,000,000.  
+● The total amount of mosaics the creator owns is lesser than the amount the creator wants to decrease/delete.  
 
-**Monitoring Blockchain**
-Transactions that are being broadcasted to the network are not being confirmed immediately. To
-keep track on the block confirmation, there are 2 ways to [monitor the blockchain](https://rb2nem.github.io/nem-dev-guide/07-monitoring-blockchain/) for updates.  
+**Monitoring Blockchain**  
+Transactions that are being broadcasted to the network are not being confirmed immediately. To keep track on the block confirmation, there are 2 ways to [monitor the blockchain](https://rb2nem.github.io/nem-dev-guide/07-monitoring-blockchain/) for updates.   
 
-1. Active monitoring: Pooling approach
+1. Active monitoring: Pooling approach  
 
-2. Passive monitoring: Subscription approach
+2. Passive monitoring: Subscription approach  
