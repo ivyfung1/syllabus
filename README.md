@@ -1,23 +1,23 @@
 # Syllabus
 Syllabus for Universities and Colleges
 
-* **Prerequisites**
+**Prerequisites**
 
 Interested in developing applications that would utilize NEM Blockchain features. Proficient in any programming language (may specify a language to focus) with understanding of Application Programme Interface (API).
 
-* **Objectives**
+**Objectives**
 
 Prepare the students to be ready to design and code applications utilizing NEM Blockchain features through API. 
 
-* **Duration**
+**Duration**
 
 36 hours
 
-* **Overview**
+**Overview**
 
 In this course, students will get a good understanding about Blockchain, NEM technology and ways to integrate use cases with NEM Blockchain to achieve a more effective and more efficient outcome. Students will get good understanding of the functions of Blockchain, the uniqueness of NEM Technology, various application possibilities, and the techniques of bridging existing applications through APIs. Student will be able to bridge Blockchain technology with current applications seamlessly after this course. In addition, the syllabus will be constantly updated to reflect the new releases of NEM Blockchain.
 
-* **Outcomes**
+**Outcomes**
 
 The students will be equipped with knowledge to transform business processes, without compromising user experiences. 
 
@@ -52,7 +52,6 @@ In this chapter, you will learn about what is Blockchain and its characteristics
 |  |• Block gets added to the honest chain.  |  |
 |  |• The limitations of Blockchain  |  |
 |History of Blockchain  |**When** was Blockchain started?  |1 hour  |
-|  |• History of Money  |  |
 |  |• Pre-Bitcoin  |  |
 |  |  o DigiCash|  |
 |  |  o HashCash |  |
@@ -122,7 +121,7 @@ In this chapter, NEM Blockchain will be introduced to you. Its history, its arch
 |  |o Aggregate Transaction  |  |
 |  |o Cross-ChainSwap  |  |
 
-## NEM Techical
+## NEM Technical
 In this chapter, SDKs and wrappers, APIs and JSON will be discussed. Catapult setting up will be introduced. By completing this module, one will be able to initiate a GET or POST transaction through various channels, including NEM Wallet, and understand the differences and similarities between NEM1 and NEM2.
 * **Total 9 hours**
 
@@ -151,10 +150,6 @@ In this chapter, SDKs and wrappers, APIs and JSON will be discussed. Catapult se
 |  |  o Apostille|  |
 |  |  o Invoice|  |
 |  |  o Explorer|  |
-|Setting up Catapult  |**How** to setup Catapult?  |3 hours  |
-|  |• Setting Catapult up through Docker  |  |
-|  |• Using NEM2-cli  |  |
-|  |• Exploring endpoints with Insomnia.  |  |
 
 ## Applying NEM
 In this chapter, we look into evaluating the need of blockchain for a project. Evaluate the necessity for the data to be recorded on the blockchain and how to do it.
